@@ -1,0 +1,15 @@
+version: '2'
+services:
+  sio_db:
+    image: mysql:8
+    volumes:
+      - "./mysql-sio/db:/var/lib/mysql"
+    restart: always
+    ports:
+      - 33060:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: sio
+      MYSQL_USER: sio
+      MYSQL_PASSWORD: sio
+
