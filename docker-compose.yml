@@ -1,15 +1,16 @@
-version: '2'
+version: '3'
 services:
   sio_db:
-    image: mysql:8
+    image: mysql:5.6
     volumes:
       - "./mysql-sio/db:/var/lib/mysql"
+      - "./sql:/docker-entrypoint-initdb.d:ro"
+      - "./sh:/root/sh:ro"
     restart: always
     ports:
       - 33060:3306
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: sio
-      MYSQL_USER: sio
-      MYSQL_PASSWORD: sio
-
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+    #command: /bin/sh -c '/root/sh/wait-for-it.sh localhost:3306 -t 20 -- /usr/bin/mysql -v -h 127.0.0.1 -u root -p${MYSQL_ROOT_PASSWORD} < /root/sql/BD03.sql'
