@@ -1,2 +1,4 @@
 .env
+create-run_containers.sh
+containers_list.txt
 /mysql-sio/

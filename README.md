@@ -3,11 +3,12 @@
 
 ```
 cp .env.example .env
-docker-compose up -d
+MYSQL_PORT=33060 COMPOSE_PROJECT_NAME=mysql1 MYSQL_PASSWORD=azerty docker-compose up -d 
 mysql -h 127.0.0.1 -u sio -P 33060 -p
 ```
 
-The default password is : sio
+In this example, the sio password is : azerty
+
 
 
 

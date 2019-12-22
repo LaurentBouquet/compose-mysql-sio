@@ -1,0 +1,36 @@
+version: '3.4'
+
+x-instances:
+  &default-instance
+  image: mysql:5.6
+  restart: always
+  env_file: .env
+  environment:
+    - MYSQL_PORT
+    - MYSQL_ROOT_PASSWORD
+    - MYSQL_USER
+    - MYSQL_PASSWORD
+
+
+services:
+
+  mysql-prof:
+    << : *default-instance
+    ports:
+      - "33000:3306"
+    volumes:
+      - "./mysql-sio/prof:/var/lib/mysql"
+      - "./sql:/docker-entrypoint-initdb.d:ro"
+
+  mysql-julien:
+    << : *default-instance
+    ports:
+      - "33001:3306"
+    volumes:
+      - "./mysql-sio/julien:/var/lib/mysql"
+      - "./sql:/docker-entrypoint-initdb.d:ro"
+
+
+
+
+

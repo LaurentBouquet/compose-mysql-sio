@@ -1,0 +1,19 @@
+version: '3'
+services:
+  sio_db:
+    image: mysql:5.6
+    #image: mariadb:10.3
+    #linuxserver/mariadb
+    volumes:
+      - "./mysql-sio/db:/var/lib/mysql"
+      - "./sql:/docker-entrypoint-initdb.d:ro"
+      - "./sh:/root/sh:ro"
+    restart: always
+    ports:
+      - "${MYSQL_PORT}:3306"
+    environment:
+      - MYSQL_PORT
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+    #command: /bin/sh -c '/root/sh/wait-for-it.sh localhost:3306 -t 20 -- /usr/bin/mysql -v -h 127.0.0.1 -u root -p${MYSQL_ROOT_PASSWORD} < /root/sql/BD03.sql'
